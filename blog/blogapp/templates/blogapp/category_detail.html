@@ -8,8 +8,8 @@
         
 	{% for post in category.post_set.all %}
 	{% include 'blogapp/_post.html' %}
-	<a href="{% url 'blogapp:detail' post.id %}">Leave a comment...</a>
 
+	<a href="{% url 'blogapp:detail' post.id %}">Leave a comment...</a>
     {% endfor %}
 
 	{% endblock 'content' %}
