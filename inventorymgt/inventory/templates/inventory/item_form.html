@@ -23,6 +23,21 @@ $(document).ready(function () {
                 },
         });
     });
+
+	$("#plus").click(
+		function(event) {
+			event.preventDefault();
+			form = $(this).parents("form");
+			form.find("#id_quantity").val(Number(form.find("#id_quantity").val())+1);
+			form.submit();
+	});
+	$("#minus").click(
+		function(event) {
+			event.preventDefault();
+			form = $(this).parents("form");
+			form.find("#id_quantity").val(Number(form.find("#id_quantity").val())-1);
+			form.submit();
+	});
 });
 </script>
 
@@ -30,13 +45,29 @@ $(document).ready(function () {
 {% endblock %}
 <h1>{% if item %}Update{% else %}Add{% endif %} An Item</h1>
 {% block 'content' %}
-<form action="." method="post">
+<form action="." method="post" id="itemform">
 {% csrf_token %}
 <table class="table">
-{{ form }}
+{% for field in form %}
+<tr>
+{{ field.label_tag }}
+</tr>
+<tr>
+</tr>
+
+{% ifequal field.auto_id "id_quantity" %}
+<button id="minus" class="btn btn-default"><span class="glyphicon glyphicon-minus"></span></button>
+{{ field }}
+<button id="plus" class="btn btn-default"><span class="glyphicon glyphicon-plus"></span></button>
+{% else %}
+{{ field }}
+
+{% endifequal %}
+
+{% endfor %}
 <tr>
     <td colspan="2">
-        <button class="btn btn-primary">{% if category %}Update{% else %}Add{% endif %} Item</button>
+        <button class="btn btn-primary">{% if item %}Update{% else %}Add{% endif %} Item</button>
     </td>
 </tr>
 

@@ -37,6 +37,11 @@ class CategoryListView(ListView):
 
 class CategoryDetailView(DetailView):
     model = Category
+    
+    def render_to_response(self, context, **kwargs):
+	if self.request.is_ajax():
+	    return JsonResponse(serializers.serialize('json', self.object))
+	return super(CategoryDetailView, self).render_to_response(context, **kwargs)
 
 class CreateCategoryView(CreateView):
     model = Category
@@ -63,7 +68,7 @@ class CreateItemView(CreateView):
     def get_success_url(self):
         return reverse('inventory:categorydetail', args=(self.object.category.id,))
 
-class UpdateItemView(UpdateView):
+class UpdateItemView(AjaxableResponseMixin, UpdateView):
     model = Item
     fields = ['name', 'quantity', 'sku', 'category']
 
