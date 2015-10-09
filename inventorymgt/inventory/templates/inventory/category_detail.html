@@ -4,19 +4,16 @@
 
 <h3>Current Items in {{category.name}}</h3>
 {% for item in category.item_set.all %}
-	<form action="{% url 'inventory:itemupdate' item.quantity %}" method="post">
-		{% csrf_token %}
 		<table class="table">
 		    <tr>
 		        <td colspan="1">{{ item.name }}
-			<input value="{{ item.quantity }}" type="number" name="quantity" min="0" style="width:50px; margin-left:10px;">
-	    		<input type="submit" value="Update" style="margin-left:10px;">
+			<p style="width:50px; margin-left:10px;">{{ item.quantity }}</p>
    	    <a href="{% url 'inventory:deleteitem' item.id %}"><span style="color:red; margin-left:10px;" class="glyphicon glyphicon-remove"></span></a>
 			    </td>
 			</tr>
 		</table>
-	</form>
 
+<p><a style="color:black" href="{% url 'inventory:itemupdate' item.id %}"><span style="color:blue" class="glyphicon glyphicon-edit"></span>&nbsp;Edit Item</a></p>
 {% empty %}
    <p>There are no items. Want to <a href="{% url 'inventory:additem' %}">add one?</a></p>
 

@@ -11,6 +11,7 @@
 	<a href="{% url 'inventory:categoryupdate' category.id %}"><span class="glyphicon glyphicon-edit"></span></a>
 	<a href="{% url 'inventory:deletecategory' category.id %}" style="color:red"><span class="glyphicon glyphicon-remove"></span></a></h4>
 	
+	<p><a style="color:black" href="{% url 'inventory:additem' %}"><span style="color:green" class="glyphicon glyphicon-plus"></span>&nbsp;Add New Item</a></p>
 	<p>{{ category.description }}<p>
 	
 
