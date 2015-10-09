@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block 'title' %}Deletion{% endblock %}
+
+{% block 'content' %}
+<h1>Delete successful</h1>
+
+<p>Your request has been processed.</p>
+<a href="{% url 'inventory:categorylist' %}">Categories</a>
+{% endblock %}

@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% block 'title' %}{% if item %}Update{% else %}Add{% endif %} An Item{% endblock %}
+
+{% block 'extrascripts' %}
+<script>
+// $(function () {
+$(document).ready(function () {
+ $('#itemform').submit(
+    function (event) {
+        event.preventDefault();
+        $.ajax({
+            url: $(this).attr('action'),
+            type: 'post',
+            data: $(this).serialize(),
+            success: function (data) {
+                    $('#status').text('Successfully updated ' + data.title).show().fadeOut(5000);
+                    
+                    console.log(data);
+                },
+            error: function (xd4, statusText, errorText) {
+                    $('#status').text('Uh oh. Something didn\'t go right.');
+                    console.log("error was " + statusText + " and error text was " + errorText);
+                },
+        });
+    });
+});
+</script>
+
+
+{% endblock %}
+<h1>{% if item %}Update{% else %}Add{% endif %} An Item</h1>
+{% block 'content' %}
+<form action="." method="post">
+{% csrf_token %}
+<table class="table">
+{{ form }}
+<tr>
+    <td colspan="2">
+        <button class="btn btn-primary">{% if category %}Update{% else %}Add{% endif %} Item</button>
+    </td>
+</tr>
+
+</table>
+
+</form>
+{% endblock %}

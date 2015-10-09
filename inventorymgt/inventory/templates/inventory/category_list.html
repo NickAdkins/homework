@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block 'title' %}List of Categories{% endblock %}
+{% block 'content' %}
+
+
+<h1>Categories</h1>
+{% for category in category_list %}
+
+	<h4><a href="{% url 'inventory:categorydetail' category.id %}" style="color:black">
+	{% if category.parent %}<span style="color:gray">{{ category.parent}}</span>/{% else %}{%endif %}{{ category.name }}</a>
+	<a href="{% url 'inventory:categoryupdate' category.id %}"><span class="glyphicon glyphicon-edit"></span></a>
+	<a href="{% url 'inventory:deletecategory' category.id %}" style="color:red"><span class="glyphicon glyphicon-remove"></span></a></h4>
+	
+	<p>{{ category.description }}<p>
+	
+
+{% empty %}
+	<p>There are no categories. Want to <a href="{% url 'inventory:addcategory' %}">add one?</a></p>
+
+{% endfor %}
+
+<p><a style="color:black" href="{% url 'inventory:addcategory' %}"><span style="color:green" class="glyphicon glyphicon-plus"></span>&nbsp;Add A New Category</a></p>
+
+{% endblock %}
