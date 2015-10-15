@@ -13,7 +13,7 @@
         <h4>On {{ comment.pub_date|date:"M d, Y h:m:s" }}, {{ comment.person }} commented:</h4>
         <div class="well">
         {{ comment.comment_text }}
-        </div>
+        </div>	
 
         {% if not forloop.last %}
         <hr>
@@ -23,5 +23,8 @@
         <p>Be the first of your friends to comment on this post.</p>
 
     {% endfor %}
+
+	<hr>
+	
 
 {% endblock 'content' %}

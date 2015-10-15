@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block 'title' %}List of Kaizens{% endblock %}
+
+{% block content %}
+    <h1>List of User-submitted Kaizens</h1>
+	<p><a href='{% url 'kaizen:addidea' %}'>Add Idea Here!</a></p>
+
+    {% for idea in idea_list %}
+		<div {% ifequal idea.profile.user request.user %} class="marker" {% else %} class="kaizen" {% endifequal %}>
+			<a href="{% url 'kaizen:updatestatus' idea.id %} "class="status">Status: <span class="stats">{{ idea.get_status_display }}</span></a>
+			<a href="{% url 'kaizen:ideadetail' idea.id %}">
+				<h3>{{ idea.title }}</h3>
+				<p>Submitted by <span class="user">{{ idea.profile }}</span> on {{ idea.pub_date|date:"M d, Y" }} in {{ idea.category.title }}</p>
+				<p class="description">{{ idea.description }}</p>
+			</a>
+		</div>
+
+    {% empty %}
+        <p>No kaizens submited yet. Want to <a href="{% url 'kaizen:addidea' %}">submit one?</a></p>
+
+    {% endfor %}
+    
+
+{% endblock %}

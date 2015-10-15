@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block 'title' %}Delete {{ idea.name }}?{% endblock %}
+
+{% block content %}
+<div class="confirm-delete">
+	<p>Are you sure you want to delete {{ idea.name }}?</p>
+	<form action"{% url 'kaizen:deleteidea' idea.id %}" method="POST">
+		{% csrf_token %}
+		{{ form }}
+		<button class="btn btn-delete">Delete</button>
+		<a href="{% url 'kaizen:idealist' %}" class="btn btn-cancel">Cancel</a>
+	</form>
+</div>
+{% endblock %}
