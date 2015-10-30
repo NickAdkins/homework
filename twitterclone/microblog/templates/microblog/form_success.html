@@ -1,0 +1,7 @@
+{% extends 'base.html %}
+
+{% block title %}Stalker ;){% endblock %}
+
+	{% block content %}
+		<p>You are now successfully keeping track of <a href="{% url 'microblog:profiledetail' profile.id %}">{{% profile.id %}}</a>...</p>
+	{% endblock %}
