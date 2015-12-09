@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block title %}Call Logs{% endblock %}
+{% block content %}
+    <div class="row">
+    <div class="col-lg-6">
+        <div class="panel panel-primary">
+        <div class="panel-heading" style="background:#03a9f4;"> 
+            List of Call Logs
+        </div>
+            <div class="panel-body">
+                    <table class="table">
+                        <tbody>
+    {% if calllog_list %}
+    {% for calllog in calllog_list %}
+     <tr><td><a href="{% url 'crm:calllog_detail' calllog.id %}">{{ calllog }}</a></td>
+    </tr>
+    {% endfor %}
+    </tbody>
+    </table>
+    {% else %}
+    <p>No call logs.</p>
+    {% endif %}
+</tbody>
+            </table>
+            <div class="pull-right">
+            <a href="{% url 'crm:opportunity_create' %}"class="btn btn-primary btn-fab btn-raised mdi-content-add-box text-right" ></a>
+            </div>
+        </div>
+        </div>
+    </div>
+    </div>
+</div>
+{% endblock %}

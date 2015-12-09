@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}Campaign {{ campaign.name }}{% endblock %}
+
+{% block content %}
+
+  <table class="table table-striped">
+    <thead>
+      <tr class="success">
+        <th>Name</th>
+        <th>Description</th>
+        <th>Edit</th>
+        <th>Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>{{ campaign.name }}</td>
+        <td>{{ campaign.description }}</td>
+        <td><a  href="{% url 'crm:campaign_update' campaign.id %}"><span class="glyphicon glyphicon-edit"></a></td>
+        <td><a  href="{% url 'crm:campaign_delete' campaign.id %}"><span style="color:red;" class="glyphicon glyphicon-remove"></a></td>
+      </tr>
+    </tbody>
+  </table>
+<a class="btn btn-success" style="background:#009688; float:right;" href="{% url 'crm:campaign_list' %}">Campaign List</a>
+{% endblock %}

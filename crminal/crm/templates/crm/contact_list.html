@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block title %}Contacts{% endblock %}
+{% block content %}
+    <div class="row">
+    <div class="col-lg-6">
+        <div class="panel panel-primary">
+        <div class="panel-heading" style="background:#03a9f4;"> 
+            Contact List
+        </div>
+    {% if contact_list %}
+<div class="panel-body">
+<table class="table">
+<tbody>
+    {% for contact in contact_list %}
+      <tr><td><a href="{% url 'crm:contact_detail' contact.id %}">{{ contact }}</a></td></tr>
+    {% endfor %}
+    {% else %}
+        <p>No contacts available.</p>
+    {% endif %}
+</tbody>
+</table>
+<div class="pull-right">
+            <a href="{% url 'crm:contact_create' %}"class="btn btn-primary btn-fab btn-raised mdi-content-add-box text-right"></a>
+            </div>
+        </div>
+        </div>
+{% endblock content %}

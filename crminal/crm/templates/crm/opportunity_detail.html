@@ -1,0 +1,144 @@
+{% extends 'base.html' %}
+
+{% block title %}Opportunity {{ opportunity.name }}{% endblock %}
+
+{% block content %}
+ <div class="row">
+        <div class="col-lg-12">
+            <div class="jumbotron">
+                <h1>Opportunity {{ opportunity.name }} {{ opportunity.stage }}</a>
+                <p class="pull-right"><a href="{% url 'crm:opportunity_update' opportunity.id %}"><span class="glyphicon glyphicon-edit"></a>
+        <a href="{% url 'crm:opportunity_delete' opportunity.id %}"><span style="color:red;" class="glyphicon glyphicon-remove"></a></p>
+             </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    Contact Information
+                </div>
+                <div class="panel-body">
+                <table class="table">
+                    <tr>
+                        <td>Company</td>
+                        <td><a href="{% url 'crm:company_list' %}">{{ opportunity.company }}</a></td>
+                    </tr>
+                    <tr>
+                        <td>Address</td>
+                        <td>{{ opportunity.company.address1 }}</td>
+            <td>{{ opportunity.company.address2 }}</td>
+                    </tr>
+                    <tr>
+                        <td>City</td>
+                        <td>{{ opportunity.company.city }}</td>
+                    </tr>
+                    <tr>
+                        <td>State, Zip</td>
+                        <td>{{ opportunity.company.state }}, {{opportunity.company.zipcode }}</td>
+                    </tr>
+                    <tr>
+                        <td>Phone</td>
+                        <td>{{ opportunity.company.phone }}</td>
+                    </tr>
+                    <tr>
+                        <td>Website</td>
+                        <td><a href="{{ opportunity.company.website }}">{{ opportunity.company.website }}</a></td>
+                    </tr>
+                </table>
+                    <div class="pull-right">
+                    <a href="{% url 'crm:company_update' opportunity.company.id %}" class="btn btn-primary btn-fab btn-raised mdi-content-create text-right"></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    Map
+                </div>
+                <div class="panel-body">
+    <center><div id="map" style="width: auto; height: 300px;"></div></center>
+<script>
+var map;
+function initMap() {
+    address = '{{ opportunity.company.address1 }} {{ opportunity.company.address2 }}, {{ opportunity.company.city }}, {{ opportunity.company.state }} {{ opportunity.company.zipcode }}' ;
+    var geocoder  = new google.maps.Geocoder();
+    geocoder.geocode({ 'address': address}, function(results, status) {
+        var c = results[0].geometry.location;
+        latitude  = c.lat();
+        longitude = c.lng();
+        map = new google.maps.Map(document.getElementById('map'), {
+            center: {lat: latitude, lng: longitude},
+            scrollwheel: false,
+            zoom: 14,
+        });
+        var marker = new google.maps.Marker({
+            map: map,
+            position: {lat: latitude, lng: longitude},
+            title: 'Opportunity Name',
+        });
+    });
+}
+</script>
+<script type="text/javascript" src="https://maps.google.com/maps/api/js?key=AIzaSyDxCDEfKuCyTVE-Ex43CG5PQec_Uc5CiQQ&callback=initMap" async defer></script>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<div class="row">
+        <div class="col-lg-6">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    Call Log for ACME, Inc.
+                        <span class="text-right pull-right">
+                            <a href="{% url 'crm:calllog_list' %}" class="btn btn-primary btn-sm mdi-action-list" style="margin-top: -7px;"></a>
+                        </span>
+                </div>
+                <div class="panel-body">
+                <table class="table">
+                <tr>   
+                    <th>Date</th>
+                    <th>Note</th>
+                    <th>User</th>
+                </tr>
+                <tr>
+        {% for calllog in calllog_list %}   
+                    <td>{{ calllog.date|date:"j M Y" }}</td>
+                    <td>{{ calllog.note }}</td>
+                    <td>{{ calllog.user }}</td>
+                </tr>
+        {% endfor %}
+                </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-6">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    Stage History
+                        <span class="text-right pull-right">
+                            <a href="#" class="btn btn-primary btn-sm mdi-action-list" style="margin-top: -7px;" title="List all Opportunities"></a>
+                        </span>
+                </div>
+                <div class="panel-body">
+                    <table class="table">
+                        <th>Date</th>
+                        <th>Stage</th>
+                        <th>User</th>
+                    </tr>
+        {% for opp in opportunitystages %}<tr>
+                    <tr>
+                        <td>{{ opp.time_stamp }}</td>
+                        <td>{{ opp.stage }}</td>
+                        <td>{{ opp.user }}</td>
+                    </tr>
+        {% endfor %}
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

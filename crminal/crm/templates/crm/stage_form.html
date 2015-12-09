@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}{% if stage %}Upate Stage {{ stage.name }} {% else %} Create a New Stage {% endif %}{% endblock %}
+
+{% block content %}
+
+<div class="well bs-component" style="display:inline-block">
+  <form  action="." method="post" role="form">
+  <table class="table">
+  {% csrf_token %}
+  <th colspan="2"><h1><center>{% if stage %}Update{% else %}New Stage{% endif %} {{ stage }}</center></h1></th>
+  {{ form }}
+  <tr><td colspan="2"><button class="btn btn-primary">{% if stage %}Update{% else %}Create{% endif %}</button><a style="float:right; margin-top:20px;" href="..">Cancel</a></tr></td>
+  </table>
+</form>
+</div>
+{% endblock %}

@@ -1,8 +1,13 @@
 from django.contrib import admin
-from django.apps import apps
+from .models import Stage, Company, Contact, Campaign, Opportunity, Reminder, Report, CallLog, OpportunityStage 
 
 # Register your models here.
-app = apps.get_app_config('crm')
-
-for model_name, model in app.models.items():
-    admin.site.register(model)
+admin.site.register(Stage)
+admin.site.register(Company)
+admin.site.register(Contact)
+admin.site.register(Campaign)
+admin.site.register(Opportunity)
+admin.site.register(Reminder)
+admin.site.register(Report)
+admin.site.register(CallLog)
+admin.site.register(OpportunityStage)

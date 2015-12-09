@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title %}Reminders{% endblock %}
+
+{% block content %}
+    <div class="row">
+    <div class="col-lg-6">
+        <div class="panel panel-primary">
+        <div class="panel-heading" style="background:#03a9f4;"> 
+            Reminder List
+        </div>
+            <div class="panel-body">
+           <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Reminder</th>
+                                <th>Completed</th>
+                            </tr>
+                        </thead>
+    {% if reminder_list %}
+    {% for reminder in reminder_list %}
+    <tr><td><a href="{% url 'crm:reminder_detail' reminder.id %}">{{ reminder}}</td><td>{{ reminder.completed }}</td></a></tr>
+    {% endfor %}
+    {% else %}
+    <p>No reminders to list</p>
+    {% endif %}
+</tbody>
+            </table>
+            <div class="pull-right">
+            <a href="{% url 'crm:reminder_create' %}" class="btn btn-primary btn-fab btn-raised mdi-content-add-box text-right"></a>
+            </div>
+        </div>
+        </div>
+    </div>
+    </div>
+{% endblock content %}

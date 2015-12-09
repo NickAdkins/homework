@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}{% if reminder %}Upate Reminder {{ reminder.name }} {% else %} Create a New Reminder {% endif %}{% endblock %}
+
+{% block content %}
+
+<div class="well bs-component" style="display:inline-block">
+  <form  action="." method="post" role="form">
+  <table class="table">
+  {% csrf_token %}
+  <th colspan="2"><h1><center>{% if reminder %}Update{% else %}New Reminder{% endif %} {{ reminder }}</center></h1></th>
+  {{ form }}
+  <tr><td colspan="2"><button class="btn btn-primary">{% if reminder %}Update{% else %}Create{% endif %}</button><a style="float:right; margin-top:20px;" href="..">Cancel</a></tr></td>
+  </table>
+</form>
+</div>
+{% endblock %}
