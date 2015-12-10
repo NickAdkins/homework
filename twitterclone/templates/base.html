@@ -56,7 +56,8 @@
           <ul class="nav navbar-nav">
             <li>
                 {% if request.user.is_authenticated %}
-                   <li><a href="{% url 'auth_logout' %}">Log Out</a>
+                    <li><a href="{% url 'microblog:profiledetail' request.user.profile_set.all.0.id %}">Profile</a></li>
+		    <li><a href="{% url 'auth_logout' %}">Log Out</a></li>
                 {% else %}
                     <a href="{% url 'auth_login' %}">Log In</a>
                     </li>

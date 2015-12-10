@@ -2,7 +2,7 @@
 
 {% block 'title' %}{% if idea %}Update{% else %}Add{% endif %} Idea{% endblock %}
 
-{% block 'content' %}
+{% block content %}
 
 <form action="." method="post" class="form idea_form" role="form">
 	{% csrf_token %}
@@ -22,4 +22,4 @@
 	<button class="btn btn-primary">{% if idea %} Update {% else %} Add {% endif %}</button>
 </form>
 
-{% endblock 'content' %}
+{% endblock content %}

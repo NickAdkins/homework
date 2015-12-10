@@ -32,7 +32,7 @@ def search(request):
                 opp_results = opp_results + list(opp_firstname) + list(opp_lastname) + list(opp_stage)
                 company_results = company_results + list(company)
 
-                opp_stage = Opportunity.objects.filter(opportunity_stage__icontains = search_word)
+                opp_stage = OpportunityStage.objects.filter(opportunity__stage__name__icontains = search_word)
 
             return render_to_response('crm/search_results.html', {'search':search_words, 'contacts': contact_results, 'opps': opp_results, 'companies':company_results}, context_instance=RequestContext(request))
 

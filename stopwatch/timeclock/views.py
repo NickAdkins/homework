@@ -103,7 +103,6 @@ class ReportView(ListView):
         # Get all objects for the current query
         queryset = self.get_queryset()
 
-        # Commented out because this was a fun academic exercize
         #get_total_time = lambda queryset: sum([punch.duration() for punch in queryset])
         #context["total_time"] = get_total_time(queryset)
 

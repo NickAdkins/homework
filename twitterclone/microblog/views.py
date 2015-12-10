@@ -88,7 +88,7 @@ class UpdateProfileView(UpdateView):
 	fields = ['bio', 'picture', 'following']
 
 	def get_success_url(self):
-		return reverse('microblog:profiledetail', args = (self.get_object().pk))
+		return reverse('microblog:profiledetail', args = (self.get_object().pk,))
 
 	def form_valid(self, form):
 		profile = form.save(commit=False)
