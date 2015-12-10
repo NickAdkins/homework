@@ -58,11 +58,6 @@ class Reports(ListView):
     model = Report
     template_name = "reports/dashboard.html"
 
-#class StageViewSet(ModelViewSet):
-#    model = Stage
-#    fields = ['name', 'order', 'descripton', 'value']
-#    #success_url = reverse_lazy('crm:stage_list')
-
 class CallLogList(ListView):
     model = CallLog
 
